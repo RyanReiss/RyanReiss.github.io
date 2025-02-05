@@ -1,13 +1,22 @@
 {
   "name": "particle",
   "version": "1.0.0",
-  "description": "",
+  "description": "My Portfolio",
+  "homepage": "https://github.com/RyanReiss/RyanReiss.github.io#readme",
+  "bugs": {
+    "url": "https://github.com/RyanReiss/RyanReiss.github.io/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanReiss/RyanReiss.github.io.git"
+  },
+  "license": "ISC",
+  "author": "Nathan Randecker",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "dev": "gulp"
   },
-  "author": "Nathan Randecker",
-  "license": "ISC",
   "dependencies": {
     "browser-sync": "^2.26.3",
     "gulp": "^4.0.0",
