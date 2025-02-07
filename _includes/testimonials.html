@@ -1,151 +1,100 @@
-<section id="testimonials">
-  <h2>Testimonials</h2>
-  <div class="testimonial-wrapper">
-    <button class="prev" onclick="changeTestimonial(-1)">&#10094;</button>
-    <div class="testimonial-container">
-      <div class="testimonial active">
-        <img src="path/to/image1.jpg" alt="Testimonial Author 1" class="testimonial-image">
-        <div class="testimonial-text">
-          <p>"This is an amazing service! It exceeded all my expectations and I couldn't be happier."</p>
-          <span class="testimonial-author">- John Doe, CEO of Example Co.</span>
-        </div>
-      </div>
-      <div class="testimonial">
-        <img src="path/to/image2.jpg" alt="Testimonial Author 2" class="testimonial-image">
-        <div class="testimonial-text">
-          <p>"Working with this team was a fantastic experience. They truly understand what the client needs."</p>
-          <span class="testimonial-author">- Jane Smith, Creative Director at Sample Studio</span>
-        </div>
+<div class="user-details">
+  <h1> Testimonials </h1>
+</div>
+<div class="testimonial-wrapper">
+  <button class="prev" onclick="changeTestimonial(-1)">&#10094;</button>
+  <div class="testimonial-container">
+    <div class="testimonial active">
+      <img src="{{ "/assets/img/robert.jpg" | relative_url }}" alt="Testimonial Author 1" class="testimonial-image">
+      <div class="testimonial-text">
+        <p>"Of the thousands of engineers I have hired or worked with, Ryan is definitely in the top 5%. He has a strong aptitude to learn, and his leadership skills make him an absolute asset for any project he is a part of. I cannot recommend him enough!"</p>
+        <span class="testimonial-author">- Robert Hohman, CEO of Glassdoor (2007-2020), CEO of Tweaking Cat Studios (2023-)</span>
       </div>
     </div>
-    <button class="next" onclick="changeTestimonial(1)">&#10095;</button>
+    <div class="testimonial">
+      <img src="{{ "/assets/img/ruben.jpg" | relative_url }}" alt="Testimonial Author 2" class="testimonial-image">
+      <div class="testimonial-text">
+        <p>"Ryan is an absolute pleasure to work with. Not only is he a great person to be around, but his ability to turn concepts into implementation is unparalleled. He has a keen eye for detail, a strong drive to get things done, and is never afraid to speak his mind!"</p>
+        <span class="testimonial-author">- Ruben Suarez, Tweaking Cat Studios Lead Artist</span>
+      </div>
+    </div>
   </div>
-  <div class="dots-container">
-    <span class="dot active" onclick="jumpToTestimonial(0)"></span>
-    <span class="dot" onclick="jumpToTestimonial(1)"></span>
-  </div>
+  <button class="next" onclick="changeTestimonial(1)">&#10095;</button>
+</div>
+<div class="dots-container">
+  <span class="dot active" onclick="jumpToTestimonial(0)"></span>
+  <span class="dot" onclick="jumpToTestimonial(1)"></span>
+</div>
 </section>
 
-<style>
-  #testimonials {
-    text-align: center;
-    padding: 60px 20px; /* Increased padding (10% taller) */
-    background-color: #f9f9f9;
-    position: relative;
-    max-width: 800px; /* Increased width (30% wider) */
-    margin: auto;
-  }
-
-  .testimonial-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .testimonial-container {
-    display: flex;
-    width: 100%;
-    max-width: 600px; /* Increased width */
-    min-height: 240px; /* Increased height */
-    overflow: hidden;
-    text-align: left;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .testimonial {
-    display: none;
-    flex: 1;
-    align-items: center;
-    transition: opacity 0.5s ease-in-out;
-  }
-
-  .testimonial.active {
-    display: flex;
-  }
-
-  .testimonial img {
-    width: 85px; /* Increased size */
-    height: 85px;
-    border-radius: 50%;
-    margin-right: 20px;
-  }
-
-  .testimonial-author {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-    color: #555;
-  }
-
-  /* Navigation Buttons (Now Positioned Outside) */
-  .prev, .next {
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    font-size: 24px;
-    border-radius: 5px;
-    transition: background 0.3s;
-    position: absolute;
-  }
-
-  .prev {
-    left: -50px; /* Positioned outside */
-  }
-
-  .next {
-    right: -50px; /* Positioned outside */
-  }
-
-  .prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-
-  /* Dots for Progress Indicators */
-  .dots-container {
-    text-align: center;
-    margin-top: 15px;
-  }
-
-  .dot {
-    cursor: pointer;
-    height: 12px;
-    width: 12px;
-    margin: 0 5px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background 0.3s;
-  }
-
-  .dot.active {
-    background-color: #333;
-  }
-</style>
-
 <script>
-  let currentIndex = 0;
-  const testimonials = document.querySelectorAll(".testimonial");
-  const dots = document.querySelectorAll(".dot");
+  document.addEventListener("DOMContentLoaded", function () {
+    let currentIndex = 0;
+    const testimonials = document.querySelectorAll(".testimonial");
+    const dotsContainer = document.querySelector(".dots-container");
 
-  function changeTestimonial(direction) {
-    testimonials[currentIndex].classList.remove("active");
-    dots[currentIndex].classList.remove("active");
-    currentIndex = (currentIndex + direction + testimonials.length) % testimonials.length;
-    testimonials[currentIndex].classList.add("active");
-    dots[currentIndex].classList.add("active");
+    // Clear any pre-existing dots to prevent duplicates
+    dotsContainer.innerHTML = "";
+
+    // Create the dots dynamically based on number of testimonials
+    testimonials.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.classList.add("dot");
+      if (i === 0) dot.classList.add("active"); // Set first dot as active initially
+      dot.onclick = () => jumpToTestimonial(i);
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll(".dot");
+
+    function changeTestimonial(direction) {
+      testimonials[currentIndex].classList.remove("active");
+      dots[currentIndex].classList.remove("active");
+
+      currentIndex = (currentIndex + direction + testimonials.length) % testimonials.length;
+
+      testimonials[currentIndex].classList.add("active");
+      dots[currentIndex].classList.add("active");
+    }
+
+    function jumpToTestimonial(index) {
+      testimonials[currentIndex].classList.remove("active");
+      dots[currentIndex].classList.remove("active");
+
+      currentIndex = index;
+
+      testimonials[currentIndex].classList.add("active");
+      dots[currentIndex].classList.add("active");
+    }
+
+    // Expose functions to global scope
+    window.changeTestimonial = changeTestimonial;
+    window.jumpToTestimonial = jumpToTestimonial;
+  });
+
+  function setUniformTestimonialSize() {
+    const testimonials = document.querySelectorAll(".testimonial");
+    let maxHeight = 0;
+    let maxWidth = 0;
+
+    // Find the tallest and widest testimonial
+    testimonials.forEach(testimonial => {
+      testimonial.style.height = "auto"; // Reset to natural size
+      testimonial.style.width = "auto";  // Reset to natural width
+
+      maxHeight = Math.max(maxHeight, testimonial.offsetHeight);
+      maxWidth = Math.max(maxWidth, testimonial.offsetWidth);
+    });
+
+    // Apply the max height & width to all testimonials
+    testimonials.forEach(testimonial => {
+      testimonial.style.height = `${maxHeight}px`;
+      testimonial.style.width = `${maxWidth}px`;
+    });
   }
 
-  function jumpToTestimonial(index) {
-    testimonials[currentIndex].classList.remove("active");
-    dots[currentIndex].classList.remove("active");
-    currentIndex = index;
-    testimonials[currentIndex].classList.add("active");
-    dots[currentIndex].classList.add("active");
-  }
+  // Run function on page load and resize
+  document.addEventListener("DOMContentLoaded", setUniformTestimonialSize);
+  window.addEventListener("resize", setUniformTestimonialSize);
+
 </script>

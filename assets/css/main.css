@@ -4471,6 +4471,16 @@ sub, sup {
     transform: translate(-50%, -50%)
 }
 
+.header-container {
+    background: rgba(26, 34, 44, 0.8); /* Dark semi-transparent background */
+    border: 3px solid #fff; /* White border */
+    border-radius: 15px; /* Rounded corners */
+    padding: 30px; /* Adds space inside the container */
+    display: inline-block; /* Ensures it wraps content properly */
+    text-align: center; /* Centers the text inside */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+}
+
 .header .site-title {
     font-size: 50px;
     display: block;
@@ -4507,7 +4517,12 @@ sub, sup {
     color: #fff;
     text-decoration: none;
     font-size: 15px;
-    margin: 10px
+    margin: 10px;
+}
+
+.header-links .link:hover {
+    font-weight: bold; /* Makes text bold */
+    text-decoration: underline; /* Adds underline */
 }
 
 @media only screen and (min-width: 550px) {
@@ -4583,26 +4598,33 @@ sub, sup {
 #about {
     width: 90%;
     margin: 0 auto;
-    max-width: 960px
 }
 
 @media only screen and (min-width: 550px) {
     #about {
-        width: 80%
+        width: 40%
     }
 }
 
-.tech {
-    margin: 10px
+.user {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center-aligns the elements */
+    align-items: stretch;
+    gap: 20px;
+    max-width: 960px; /* Prevents excessive stretching on larger screens */
+    margin: 0 auto; /* Ensures the container itself is centered */
 }
 
-.user {
+.tech {
+    flex: 1; /* Makes all sections equal width */
+    min-width: 300px; /* Prevents sections from getting too small */
+    max-width: 320px; /* Keeps a reasonable max width */
     text-align: center;
-    font-size: 60px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between
+    border: 2px solid #000000;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .user p {
@@ -4630,15 +4652,6 @@ sub, sup {
     margin: 0 auto
 }
 
-#testimonials {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 90%;
-    max-width: 960px;
-    margin: 0 auto
-}
-
 @media only screen and (min-width: 550px) {
     #projects {
         width: 80%
@@ -4649,13 +4662,35 @@ sub, sup {
 }
 
 .user-projects {
-    margin: 20px auto
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border: 2px solid #000000; /* White border */
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px; /* Spacing inside */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    margin: 20px auto;
+    max-width: 960px;
 }
 
 .user-projects img {
-    max-width: 100%;
     height: auto;
-    border-radius: 5px
+    border-radius: 5px;
+}
+
+.user-projects .contents,
+.user-projects .contents-right {
+    flex: 1; /* Make sure text takes up space */
+    padding: 15px;
+}
+
+.images-left img,
+.images-right img {
+    width: 400px;  /* Fixed width for consistency */
+    height: 200px; /* Fixed height for consistency */
+    border-radius: 10px;
+    object-fit: cover;
 }
 
 .user-projects h5, body {
@@ -4671,24 +4706,6 @@ sub, sup {
     margin-right: 5px
 }
 
-.user-testimonials {
-    margin: 20px auto
-}
-
-.user-testimonials img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px
-}
-
-.user-testimonials h5, body {
-    margin: 0
-}
-
-.user-testimonials li {
-    color: #1a222c;
-    font-size: 1.1rem
-}
 
 @media only screen and (min-width: 550px) {
     .contents {
@@ -4739,6 +4756,133 @@ sub, sup {
     border-color: #54516a;
     color: #fff;
     transition: color .3s ease-in, background-color .3s ease-in, border-color .3s ease-in
+}
+
+#testimonials {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto
+}
+
+.user-testimonials {
+    margin: 20px auto
+}
+
+.user-testimonials img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px
+}
+
+.user-testimonials h5, body {
+    margin: 0
+}
+
+.user-testimonials li {
+    color: #1a222c;
+    font-size: 1.1rem
+}
+
+.testimonial-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    flex-direction: row; /* Ensures buttons stay on the left & right */
+    gap: 15px; /* Adds spacing between elements */
+}
+
+.prev, .next {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: #fff; /* White text */
+    padding: 10px;
+    z-index: 10; /* Ensure they appear above other elements */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background color */
+    border-radius: 5px; /* Slight round edges for buttons */
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+    color: #ddd; /* Slight color change on hover */
+}
+
+.prev {
+    margin-right: 15px;
+}
+
+.next {
+    margin-left: 15px;
+}
+
+.dots-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: #bbb; /* Default light gray for inactive dots */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #444; /* Darker gray for the active dot */
+}
+
+.dot:hover {
+    background-color: #666; /* Medium-dark gray when hovered */
+}
+
+
+.testimonial-container {
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF; /* Adjust as needed */
+    max-width: 600px;
+    text-align: left;
+    border: 2px solid #000000;
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px; /* Spacing inside */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+}
+
+.testimonial-image {
+    width: 80px;  /* Adjust as needed */
+    height: 80px; /* Adjust as needed */
+    border-radius: 50%; /* Makes it a circle */
+    object-fit: cover; /* Ensures the image fills the circle */
+    margin-right: 15px;
+}
+
+.testimonial-text {
+    flex: 1;
+}
+
+.testimonial {
+    display: none;
+}
+
+.testimonial.active {
+    display: flex;
+}
+
+.testimonial-author {
+    font-weight: bold;
+    font-style: italic;
 }
 
 .footer {
