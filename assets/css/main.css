@@ -4790,12 +4790,12 @@ sub, sup {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80%;
-    max-width: 700px;
+    width: 100%;
+    max-width: 960px;
     margin: auto;
     padding: 20px;
-    flex-direction: row; /* Ensures buttons stay on the left & right */
-    gap: 15px; /* Adds spacing between elements */
+    flex-direction: row;
+    gap: 15px;
 }
 
 .prev, .next {
@@ -4851,14 +4851,18 @@ sub, sup {
 .testimonial-container {
     display: flex;
     align-items: center;
-    background-color: #FFFFFF; /* Adjust as needed */
-    max-width: 600px;
+    flex-direction: column; /* Ensures everything stacks correctly */
+    background-color: #FFFFFF;
+    max-width: 960px;
+    width: 100%;
     text-align: left;
     border: 2px solid #000000;
-    border-radius: 15px; /* Rounded corners */
-    padding: 20px; /* Spacing inside */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    border-radius: 15px;
+    padding: 40px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-height: auto; /* Allow it to expand properly */
 }
+
 
 .testimonial-image {
     width: 80px;  /* Adjust as needed */
@@ -4869,7 +4873,13 @@ sub, sup {
 }
 
 .testimonial-text {
-    flex: 1;
+    flex-grow: 1; /* Allows it to take available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Aligns text properly */
+    width: 100%;
+    overflow: visible; /* Prevents cutting off */
 }
 
 .testimonial {
@@ -4883,6 +4893,11 @@ sub, sup {
 .testimonial-author {
     font-weight: bold;
     font-style: italic;
+    display: block;
+    margin-top: 10px;
+    text-align: right;
+    white-space: normal;
+    flex-shrink: 0; /* Ensures it does not get pushed out */
 }
 
 .footer {

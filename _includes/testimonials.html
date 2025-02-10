@@ -7,14 +7,14 @@
     <div class="testimonial active">
       <img src="{{ "/assets/img/robert.jpg" | relative_url }}" alt="Testimonial Author 1" class="testimonial-image">
       <div class="testimonial-text">
-        <p>"Of the thousands of engineers I have hired or worked with, Ryan is definitely in the top 5%. He has a strong aptitude to learn, and his leadership skills make him an absolute asset for any project he is a part of. I cannot recommend him enough!"</p>
+        <p>"Of the hundreds of engineers I have hired or worked with, Ryan is definitely in the top 5%. He has a strong aptitude to learn, and his leadership skills make him an absolute asset for any project he is a part of. I cannot recommend him enough!"</p>
         <span class="testimonial-author">- Robert Hohman, CEO of Glassdoor (2007-2020), CEO of Tweaking Cat Studios (2023-)</span>
       </div>
     </div>
     <div class="testimonial">
       <img src="{{ "/assets/img/ruben.jpg" | relative_url }}" alt="Testimonial Author 2" class="testimonial-image">
       <div class="testimonial-text">
-        <p>"Ryan is an absolute pleasure to work with. Not only is he a great person to be around, but his ability to turn concepts into implementation is unparalleled. He has a keen eye for detail, a strong drive to get things done, and is never afraid to speak his mind!"</p>
+        <p>"As the Art Director on Bellumentum, I had the pleasure of working closely with Ryan. While he possesses raw talent and strong technical skills, his artistic eye is equally impressive (especially for a developer!). However, his greatest strength is his character. He is calm, collected, and an absolute joy to collaborate with, making every interaction effortless and enjoyable. Despite his young age, he demonstrated remarkable leadership and a natural ability to bring people together. His thoughtful insights on all aspects of the game had a real impact on the project. Everyone loved working with him, and I have no doubt he will continue to thrive in the industry."</p>
         <span class="testimonial-author">- Ruben Suarez, Tweaking Cat Studios Lead Artist</span>
       </div>
     </div>
@@ -72,29 +72,30 @@
     window.jumpToTestimonial = jumpToTestimonial;
   });
 
-  function setUniformTestimonialSize() {
+function setUniformTestimonialSize() {
     const testimonials = document.querySelectorAll(".testimonial");
     let maxHeight = 0;
-    let maxWidth = 0;
 
-    // Find the tallest and widest testimonial
     testimonials.forEach(testimonial => {
-      testimonial.style.height = "auto"; // Reset to natural size
-      testimonial.style.width = "auto";  // Reset to natural width
+        testimonial.style.height = "auto"; // Reset first
+        let textElement = testimonial.querySelector(".testimonial-text");
+        let authorElement = testimonial.querySelector(".testimonial-author");
 
-      maxHeight = Math.max(maxHeight, testimonial.offsetHeight);
-      maxWidth = Math.max(maxWidth, testimonial.offsetWidth);
+        if (textElement && authorElement) {
+            maxHeight = Math.max(
+                maxHeight,
+                textElement.offsetHeight + authorElement.offsetHeight + 50
+            );
+        }
     });
 
-    // Apply the max height & width to all testimonials
     testimonials.forEach(testimonial => {
-      testimonial.style.height = `${maxHeight}px`;
-      testimonial.style.width = `${maxWidth}px`;
+        testimonial.style.height = `${maxHeight}px`; // Apply max height to all
     });
-  }
+}
 
-  // Run function on page load and resize
-  document.addEventListener("DOMContentLoaded", setUniformTestimonialSize);
-  window.addEventListener("resize", setUniformTestimonialSize);
+// Run function on page load and resize
+document.addEventListener("DOMContentLoaded", setUniformTestimonialSize);
+window.addEventListener("resize", setUniformTestimonialSize);
 
 </script>
